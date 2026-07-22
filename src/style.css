@@ -736,7 +736,7 @@ body {
   gap: 0.75rem;
 }
 
-.btn-secondary, .btn-primary-x {
+.btn-secondary, .btn-primary-x, .btn-share-all {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -769,6 +769,15 @@ body {
 
 .btn-primary-x:hover {
   background-color: #e5e7eb;
+}
+
+.btn-share-all {
+  background-color: #25d366; /* WhatsApp Green */
+  color: #ffffff;
+}
+
+.btn-share-all:hover {
+  background-color: #20ba5a;
 }
 
 .btn-icon-svg {

@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const actionPanel = document.getElementById('action-panel');
   const btnDownload = document.getElementById('btn-download');
   const btnShare = document.getElementById('btn-share');
+  const btnShareAll = document.getElementById('btn-share-all');
 
   // State Customization Elements
   const stateWatermark = document.getElementById('state-watermark');
@@ -447,6 +448,29 @@ document.addEventListener('DOMContentLoaded', async () => {
       const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&hashtags=${encodeURIComponent(hashtags)}&url=${encodeURIComponent(shareUrl)}`;
 
       window.open(twitterUrl, '_blank', 'noopener,noreferrer,width=600,height=400');
+    });
+  }
+
+  if (btnShareAll) {
+    btnShareAll.addEventListener('click', async () => {
+      const shareText = `I have officially issued a Public Expulsion Notice to Education Minister Shri Dharmendra Pradhan as a concerned citizen of ${selectedStateValue}. Systemic examination failures cannot be ignored! #NEETLeak2026`;
+      const shareUrl = window.location.href;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'The Public Expulsion Notice',
+            text: shareText,
+            url: shareUrl
+          });
+        } catch (err) {
+          console.warn('Native share aborted or failed:', err);
+        }
+      } else {
+        // Fallback to WhatsApp Web/App
+        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+      }
     });
   }
 
