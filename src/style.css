@@ -271,9 +271,24 @@ body {
   width: 100%;
 }
 
+.notice-scaler-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.notice-scale-wrapper {
+  transform-origin: top center;
+  width: 580px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
 .official-notice-paper {
   position: relative;
-  width: 100%;
+  width: 580px;
   background-color: var(--paper-bg);
   color: var(--paper-text);
   border: 4px solid var(--paper-border);

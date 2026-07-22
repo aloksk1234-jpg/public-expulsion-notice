@@ -180,6 +180,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     selectedConstituencyValue = '';
     if (mpSelectedLabel) mpSelectedLabel.textContent = `-- Select Constituency / MP in ${state} --`;
     if (mpInfoCard) mpInfoCard.classList.add('hidden');
+
+    if (window.adjustNoticeScale) {
+      window.adjustNoticeScale();
+    }
   }
 
   // 4. Setup Searchable Custom Dropdown for CONSTITUENCIES / MPs
@@ -364,6 +368,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       await document.fonts.ready;
     }
 
+    const scalerContainer = document.querySelector('.notice-scaler-container');
+    const scaleWrapper = document.querySelector('.notice-scale-wrapper');
+    let originalTransform = '';
+    let originalContainerHeight = '';
+
+    if (scaleWrapper && scalerContainer) {
+      originalTransform = scaleWrapper.style.transform;
+      originalContainerHeight = scalerContainer.style.height;
+      scaleWrapper.style.transform = 'none';
+      scalerContainer.style.height = 'auto';
+    }
+
     try {
       generatedImageDataUrl = await htmlToImage.toPng(noticeDocument, {
         quality: 1.0,
@@ -378,6 +394,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         backgroundColor: '#ffffff'
       });
       generatedImageDataUrl = canvas.toDataURL('image/png');
+    }
+
+    if (scaleWrapper && scalerContainer) {
+      scaleWrapper.style.transform = originalTransform;
+      scalerContainer.style.height = originalContainerHeight;
     }
 
     return generatedImageDataUrl;
@@ -501,4 +522,29 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (btnSupportServer) {
     btnSupportServer.addEventListener('click', dismissChaiPopup);
   }
+
+  // 10. Dynamic Mobile Scaler Layout Handler
+  const scalerContainer = document.querySelector('.notice-scaler-container');
+  const scaleWrapper = document.querySelector('.notice-scale-wrapper');
+
+  function adjustScale() {
+    if (!scalerContainer || !scaleWrapper || !noticeDocument) return;
+    const containerWidth = scalerContainer.clientWidth;
+    const baseWidth = 580;
+    const scale = Math.min(1, containerWidth / baseWidth);
+
+    scaleWrapper.style.transform = `scale(${scale})`;
+    // Adjust height of container to avoid trailing empty white space on mobile
+    scalerContainer.style.height = `${noticeDocument.offsetHeight * scale}px`;
+  }
+
+  window.addEventListener('resize', adjustScale);
+  window.addEventListener('load', adjustScale);
+  
+  // Expose adjustScale globally/locally for trigger updates
+  window.adjustNoticeScale = adjustScale;
+  
+  // Initial run
+  adjustScale();
+  setTimeout(adjustScale, 300);
 });
