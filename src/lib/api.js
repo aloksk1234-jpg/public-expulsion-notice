@@ -1,9 +1,9 @@
 /**
  * Real-Time Global Edge & Local Synchronized Resistance Leaderboard
- * Persists clicks across all devices, browsers, and platforms globally using Zero-Server Edge KV Counter API.
+ * Persists clicks across all devices, browsers, and platforms globally using KeyValue.immanuel.co REST API.
  */
 
-const NAMESPACE = 'public-expulsion-notice-2026-v1';
+const APP_KEY = '1lxq1tje';
 const STORAGE_KEY_TOTAL = 'expulsion_total_stamps_v3';
 const STORAGE_KEY_STATES = 'expulsion_state_stamps_v3';
 
@@ -24,6 +24,50 @@ function initLocalStorage() {
 initLocalStorage();
 
 /**
+ * Helper to fetch a key's value with fallback
+ */
+async function getApiValue(key, fallback = '0') {
+  try {
+    const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${APP_KEY}/${key}`);
+    if (res.ok) {
+      const val = await res.json();
+      return val !== null && val !== undefined ? val.trim() : fallback;
+    }
+  } catch (e) {
+    console.warn(`Error fetching key ${key}:`, e);
+  }
+  return fallback;
+}
+
+/**
+ * Helper to increment a key or initialize to 1 if it doesn't exist
+ */
+async function incrementOrInitKey(key) {
+  try {
+    // 1. Attempt atomic increment
+    const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/ActOnValue/${APP_KEY}/${key}/increment`, {
+      method: 'POST',
+      body: ''
+    });
+    
+    if (res.ok) {
+      const data = await res.json();
+      if (data === "Increment Successful") {
+        return;
+      }
+    }
+    
+    // 2. If increment failed (key does not exist yet), initialize to 1
+    await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${APP_KEY}/${key}/1`, {
+      method: 'POST',
+      body: ''
+    });
+  } catch (e) {
+    console.warn(`Error incrementing/initializing key ${key}:`, e);
+  }
+}
+
+/**
  * Fetch live global counts from Edge Counter API, falling back to LocalStorage
  */
 export async function fetchLeaderboard() {
@@ -32,14 +76,34 @@ export async function fetchLeaderboard() {
   let stateCounts = JSON.parse(localStorage.getItem(STORAGE_KEY_STATES) || '{}');
 
   try {
-    // Fetch global total count
-    const totalRes = await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/total`);
-    if (totalRes.ok) {
-      const totalData = await totalRes.json();
-      if (typeof totalData.count === 'number' && totalData.count > totalStamps) {
-        totalStamps = totalData.count;
-        localStorage.setItem(STORAGE_KEY_TOTAL, totalStamps.toString());
-      }
+    // 1. Fetch global active states list
+    const activeStatesStr = await getApiValue('active_states', '');
+    const activeStates = activeStatesStr ? activeStatesStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+    // 2. Fetch global total count
+    const totalCountStr = await getApiValue('total_count', '0');
+    const apiTotal = parseInt(totalCountStr, 10) || 0;
+    if (apiTotal > totalStamps) {
+      totalStamps = apiTotal;
+      localStorage.setItem(STORAGE_KEY_TOTAL, totalStamps.toString());
+    }
+
+    // 3. Fetch counts for each active state in parallel
+    if (activeStates.length > 0) {
+      const statePromises = activeStates.map(async (stateName) => {
+        const key = formatStateKey(stateName);
+        const countStr = await getApiValue(key, '0');
+        const count = parseInt(countStr, 10) || 0;
+        return { stateName, count };
+      });
+
+      const results = await Promise.all(statePromises);
+      results.forEach(({ stateName, count }) => {
+        if (count > (stateCounts[stateName] || 0)) {
+          stateCounts[stateName] = count;
+        }
+      });
+      localStorage.setItem(STORAGE_KEY_STATES, JSON.stringify(stateCounts));
     }
   } catch (err) {
     console.warn('Global Edge total counter unreachable, using cached local counts:', err);
@@ -86,20 +150,25 @@ export async function recordStampClick(stateName) {
   try {
     const sKey = formatStateKey(stateName);
     
-    // Fire-and-forget parallel background requests to Edge API
-    Promise.allSettled([
-      fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/total/up`),
-      fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/${sKey}/up`)
-    ]).then(async (results) => {
-      if (results[0].status === 'fulfilled' && results[0].value.ok) {
-        const resData = await results[0].value.json();
-        if (typeof resData.count === 'number') {
-          localStorage.setItem(STORAGE_KEY_TOTAL, Math.max(currentTotal, resData.count).toString());
-        }
+    // Perform increments in background
+    (async () => {
+      // Increment total count
+      await incrementOrInitKey('total_count');
+      
+      // Increment state count
+      await incrementOrInitKey(sKey);
+      
+      // Update active_states list
+      const activeStatesStr = await getApiValue('active_states', '');
+      const activeStates = activeStatesStr ? activeStatesStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+      if (!activeStates.includes(stateName)) {
+        activeStates.push(stateName);
+        await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${APP_KEY}/active_states/${encodeURIComponent(activeStates.join(','))}`, {
+          method: 'POST',
+          body: ''
+        });
       }
-    }).catch(err => {
-      console.warn('Edge counter sync deferred:', err);
-    });
+    })();
   } catch (err) {
     console.warn('Background edge sync error:', err);
   }
