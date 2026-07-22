@@ -276,6 +276,7 @@ body {
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .notice-scale-wrapper {
@@ -284,6 +285,7 @@ body {
   flex-shrink: 0;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .official-notice-paper {
