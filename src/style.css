@@ -446,7 +446,7 @@ body {
   gap: 0.5rem;
   background-color: #f8fafc;
   border: 1px solid #cbd5e1;
-  padding: 0.65rem 0.85rem;
+  padding: 0.65rem 125px 0.65rem 0.85rem; /* Reserved 125px space on the right */
   border-radius: 4px;
   position: relative;
   overflow: visible;
@@ -482,14 +482,20 @@ body {
 }
 
 .minister-cartoon-img {
-  width: 125px;
+  width: 110px;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
   position: absolute;
-  right: -10px;
-  top: -15px;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.minister-cartoon-img:hover {
+  transform: translateY(-50%) scale(1.05) rotate(-2deg);
 }
 
 .cell-label {
