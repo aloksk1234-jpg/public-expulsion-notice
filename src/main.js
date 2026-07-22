@@ -533,6 +533,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const baseWidth = 580;
     const scale = Math.min(1, containerWidth / baseWidth);
 
+    scalerContainer.style.height = 'auto'; // Reset constraint first to allow natural reflow
     scaleWrapper.style.transform = `scale(${scale})`;
     // Adjust height of container to avoid trailing empty white space on mobile
     scalerContainer.style.height = `${noticeDocument.offsetHeight * scale}px`;

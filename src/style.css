@@ -450,6 +450,7 @@ body {
   border-radius: 4px;
   position: relative;
   overflow: visible;
+  z-index: 3;
 }
 
 .info-cell {
