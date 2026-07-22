@@ -26,7 +26,7 @@ initLocalStorage();
 /**
  * Helper to fetch a key's value with fallback
  */
-async function getApiValue(key, fallback = '0') {
+async function getApiValue(key, fallback = '') {
   try {
     const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${APP_KEY}/${key}`);
     if (res.ok) {
@@ -40,28 +40,24 @@ async function getApiValue(key, fallback = '0') {
 }
 
 /**
- * Helper to increment a key or initialize to 1 if it doesn't exist
+ * Helper to increment a key or initialize to 1 if it doesn't exist/is empty
  */
 async function incrementOrInitKey(key) {
   try {
-    // 1. Attempt atomic increment
-    const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/ActOnValue/${APP_KEY}/${key}/increment`, {
-      method: 'POST',
-      body: ''
-    });
-    
-    if (res.ok) {
-      const data = await res.json();
-      if (data === "Increment Successful") {
-        return;
-      }
+    const val = await getApiValue(key, '');
+    if (val === '') {
+      // Key does not exist or is empty, initialize to 1
+      await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${APP_KEY}/${key}/1`, {
+        method: 'POST',
+        body: ''
+      });
+    } else {
+      // Key exists, increment atomically
+      await fetch(`https://keyvalue.immanuel.co/api/KeyVal/ActOnValue/${APP_KEY}/${key}/increment`, {
+        method: 'POST',
+        body: ''
+      });
     }
-    
-    // 2. If increment failed (key does not exist yet), initialize to 1
-    await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${APP_KEY}/${key}/1`, {
-      method: 'POST',
-      body: ''
-    });
   } catch (e) {
     console.warn(`Error incrementing/initializing key ${key}:`, e);
   }
