@@ -2289,6 +2289,222 @@ We rely on your voice to defend academic integrity in Parliament.
 
 Sincerely,
 Citizen of ${constituency}, ${state}`
+    },
+    {
+      subject: "URGENT APPEAL: Protect the Aspirations of Millions of NEET-UG Students",
+      body: `Hon'ble MP ${mpName} Ji,
+
+I write to you as a student and voter from ${constituency}, ${state}. The recent paper leak scandals in the NEET-UG examination have thrown our futures into total uncertainty.
+
+Academic merit is the only pathway for middle-class and rural youth to progress. When exam papers are leaked and grace marks distributed arbitrarily, it feels like our hard work is completely meaningless.
+
+Please demand that Parliament debates this national educational emergency immediately. We need strict reforms, an independent investigation, and a guarantee that this will never happen again.
+
+With hope and respect,
+A constituent from ${constituency}, ${state}`
+    },
+    {
+      subject: "Constituent Representation: Systemic Reforms Needed in NTA Exam Management",
+      body: `Respected MP ${mpName} Ji,
+
+Greetings. I am writing to you to draw your attention to the crisis of credibility surrounding the National Testing Agency (NTA). The repeated leaks and cancellations of examinations (NEET, NET, CSIR) have ruined the academic year of lakhs of students in ${state}.
+
+As our voice in Parliament, please demand a comprehensive reform package for the NTA. We need a modern, digitally secure, and decentralized examination mechanism that prevents centralized leak syndicates from exploiting the system.
+
+Thank you for your active leadership.
+
+Sincerely,
+Concerned Voter from ${constituency}, ${state}`
+    },
+    {
+      subject: "Parliamentary Intervention Request: Mental Health & Stress on Students Due to Exam Leaks",
+      body: `Hon'ble MP ${mpName} Ji,
+
+As a parent and resident of ${constituency}, ${state}, I am writing with a heavy heart. The recent examination scandals and the constant delays in admissions have taken a massive toll on the mental health of our children.
+
+Students who study for 14-16 hours a day are now facing severe anxiety, depression, and hopelessness. This educational crisis is also a mental health crisis for our youth.
+
+Please raise this human cost in Parliament. The Ministry of Education must be held responsible for the systemic stress inflicted on Indian families.
+
+Respectfully,
+A parent from ${constituency}, ${state}`
+    },
+    {
+      subject: "URGENT: Demand for JPC (Joint Parliamentary Committee) Investigation into Paper Leaks",
+      body: `Respected MP ${mpName} Ji,
+
+I am writing to urge you to demand a Joint Parliamentary Committee (JPC) to investigate the systemic paper leak network operating across Bihar, Gujarat, and other states.
+
+A standard departmental inquiry is insufficient to root out the deep political and administrative nexus behind these leaks. Only a bipartisan JPC can ensure complete transparency and bring the actual culprits to light.
+
+We trust that you will stand up for the youth of ${state} and demand this in the upcoming session.
+
+Best regards,
+Constituent from ${constituency}, ${state}`
+    },
+    {
+      subject: "Representation on Educational Integrity: Action Against Paper Leak Syndicates",
+      body: `Hon'ble MP ${mpName} Ji,
+
+I write to you as a concerned citizen of ${constituency}, ${state} to demand a strict, centralized anti-paper-leak law. The leak syndicates are playing with the future of the nation for financial gains.
+
+We need a legal framework that includes fast-track courts, non-bailable warrants, and asset confiscation of anyone involved in compromising national competitive examinations.
+
+Please raise this in Parliament and advocate for a clean, secure, and leak-proof academic system.
+
+Yours sincerely,
+Citizen of ${constituency}, ${state}`
+    },
+    {
+      subject: "Crisis of Public Trust in National Exams: Call for Ministry Accountability",
+      body: `Respected MP ${mpName} Ji,
+
+I am writing to express my anger at the Ministry of Education's continuous denial and delayed response to the systemic exam leaks. Millions of students have lost trust in national testing standards.
+
+When national bodies fail so consistently, the leadership of the Ministry must accept direct responsibility. We request you to raise questions in Parliament regarding administrative accountability and demand the resignation of responsible officials.
+
+With high regards,
+Concerned Citizen, ${constituency}, ${state}`
+    },
+    {
+      subject: "Concern Over Economic Burden on Poor and Rural Students Due to Exam Fiascos",
+      body: `Hon'ble MP ${mpName} Ji,
+
+I write to draw your attention to the massive financial burden that exam leaks place on rural and low-income families in ${constituency}, ${state}.
+
+Families take out loans and spend their life savings on coaching and travel for these exams. When an exam is leaked or canceled, that hard-earned money is completely lost.
+
+Please advocate for direct financial compensation or fee waivers for affected candidates from rural background in the upcoming admissions.
+
+Sincerely,
+A constituent from ${constituency}, ${state}`
+    },
+    {
+      subject: "Academic Security Request: Restoring Credibility of Indian Education Globally",
+      body: `Respected MP ${mpName} Ji,
+
+The repeated news of paper leaks in India's top competitive exams has tarnished the reputation of the Indian educational system internationally.
+
+If our national testing credentials are seen as compromised, it will affect the global prospects of Indian students. We need immediate, world-class digital security measures in national exams to restore credibility.
+
+Please speak up in Parliament to demand the modernization of our examination infrastructure.
+
+Warm regards,
+Concerned Resident, ${constituency}, ${state}`
+    },
+    {
+      subject: "Petition to Hon'ble MP: Demand Transparent Audits of NTA Computer Centers",
+      body: `Hon'ble MP ${mpName} Ji,
+
+As your constituent from ${constituency}, I request you to query the Ministry of Education in Lok Sabha regarding the security audits of NTA’s digital exam partner centers.
+
+Many digital centers have been flagged for malware and remote access compromises. We need a transparent public disclosure of security audit reports for all exam centers.
+
+We hope you will raise this technical aspect of the exam crisis in the Parliament.
+
+Sincerely,
+Voter from ${constituency}, ${state}`
+    },
+    {
+      subject: "URGENT: Constituent Petition Demanding the Postponement of Fee Hikes Amidst Exam Leaks",
+      body: `Respected MP ${mpName} Ji,
+
+I am writing from ${constituency}, ${state}. While students are suffering due to exam leaks, colleges and universities are raising admission fees. This is double harassment.
+
+Please demand in Parliament that the central government direct all institutions to freeze fee hikes for this academic year to support students facing trauma.
+
+Thank you for defending our rights.
+
+With respect,
+Citizen from ${constituency}, ${state}`
+    },
+    {
+      subject: "Academic Justice: Demand for Fast-Track Redressal of NEET Student Grievances",
+      body: `Hon'ble MP ${mpName} Ji,
+
+Lakhs of medical aspirants in ${state} are in limbo because of pending court cases and delayed counseling schedules caused by paper leaks.
+
+We need a dedicated, fast-track grievance redressal commission for students. Please demand that the government create an emergency helpdesk to resolve counseling issues on priority.
+
+Best regards,
+A constituent of ${constituency}, ${state}`
+    },
+    {
+      subject: "Urgent Inquiry: Action Taken on Bihar and Gujarat Paper Leak Centers",
+      body: `Respected MP ${mpName} Ji,
+
+As a citizen of ${constituency}, I am extremely concerned about the slow progress of police and CBI investigations into the leak syndicates in Bihar, Gujarat, and other states.
+
+We request you to demand a comprehensive white-paper in Parliament detailing all arrests, charge sheets, and institutional ties exposed in the investigation. The public deserves to know the truth.
+
+Respectfully yours,
+Citizen from ${constituency}, ${state}`
+    },
+    {
+      subject: "Educational Emergency: Demand for Immediate Parliamentary Debate on Article 21A",
+      body: `Hon'ble MP ${mpName} Ji,
+
+The Right to Education under Article 21A is meaningless without quality and integrity. The current exam scandals are a direct violation of our constitutional rights.
+
+I request you to submit a motion for an adjournment debate in Lok Sabha to discuss the exam crisis as an educational emergency.
+
+Warm regards,
+Concerned Citizen of ${constituency}, ${state}`
+    },
+    {
+      subject: "Constituent Appeal: Raise Questions on Grace Marks Formula in Lok Sabha",
+      body: `Respected MP ${mpName} Ji,
+
+The grace marks formula used by NTA in NEET-UG was completely arbitrary and created artificial rank inflation. This has locked out deserving students from government medical colleges in ${state}.
+
+Please ask the Ministry of Education in writing to explain the exact mathematical basis and audit trails for these grace marks.
+
+Sincerely,
+A student from ${constituency}, ${state}`
+    },
+    {
+      subject: "Request to Submit Private Member Bill Against Paper Leaks and Educational Fraud",
+      body: `Hon'ble MP ${mpName} Ji,
+
+As our representative from ${constituency}, I urge you to introduce a Private Member Bill in Parliament containing strict guidelines and penal actions against exam leakage, cheating syndicates, and administrative negligence.
+
+This proactive step will demonstrate your commitment to safeguarding the youth of ${state}.
+
+With regards,
+Citizen of ${constituency}, ${state}`
+    },
+    {
+      subject: "Public Call to Action: Address NEET-UG Irregularities in Parliament",
+      body: `Respected MP ${mpName} Ji,
+
+I am writing to you as a young voter from ${constituency}. The current exam fiascos have shaken my belief in the fairness of our national institutions.
+
+Please prove to us that our democratic system works by speaking up against these irregularities in Lok Sabha. We need our leaders to fight for our futures.
+
+Sincerely,
+First-Time Voter, ${constituency}, ${state}`
+    },
+    {
+      subject: "Crisis in Science and Higher Education: Reforming NET and CSIR Exams",
+      body: `Hon'ble MP ${mpName} Ji,
+
+The cancellation of UGC-NET and postponement of CSIR-NET has severely delayed research fellowships and PhD admissions for thousands of students in ${state}.
+
+This delays scientific research and holds back our academic progress. Please raise the issue of research fellowship crisis in Lok Sabha.
+
+Best regards,
+A constituent from ${constituency}, ${state}`
+    },
+    {
+      subject: "Structural Reforms: Demanding State-Level Autonomy in Professional Admissions",
+      body: `Respected MP ${mpName} Ji,
+
+The centralization of admissions through single national exams like NEET has created a single point of failure. If the central exam is compromised, the entire nation suffers.
+
+Please raise the demand for state-level autonomy in professional admissions, allowing states like ${state} to conduct their own exams or use Class XII marks to ensure fair opportunities.
+
+Sincerely,
+Concerned Resident, ${constituency}, ${state}`
     }
   ];
 
